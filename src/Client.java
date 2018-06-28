@@ -32,11 +32,7 @@ public class Client {
     private int lineCount = 0;
     Socket socket;
 
-    /**
-     * Constructs the client by laying out the GUI and registering a
-     * listener with the textfield so that pressing Enter in the
-     * listener sends the textfield contents to the server.
-     */
+
     public Client() { 	
     	final JFrame frame=new JFrame("Mr. Java"); 
     	
@@ -73,7 +69,8 @@ public class Client {
             }  
         });  
         
-        /* Search User Button
+      
+        // Search User Button
         JButton searchUserButton=new JButton("Search User");  
         searchUserButton.setBounds(660,210,120,30);  
         searchUserButton.addActionListener(new ActionListener(){  
@@ -81,21 +78,22 @@ public class Client {
     			SearchUserScreen(frame); 
             }  
         });  
-        */
-        /*// Get Users Button
-        JButton getUsersButton=new JButton("Get Users");  
+
+        // Get Users Button
+        JButton getUsersButton=new JButton("Jump to Top");  
         getUsersButton.setBounds(400,210,120,30);  
         getUsersButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
     		PrintUsersList(0);
     		lineCount = 0;
             }  
-        });  */
+        });  
+        
         
         
         frame.add(addUserButton);
         frame.add(updateUserButton);
-        //frame.add(getUsersButton);
+        frame.add(getUsersButton);
         frame.add(deleteUserButton);
         //frame.add(searchUserButton);
         frame.setSize(1200,350);  
@@ -104,7 +102,7 @@ public class Client {
         frame.setVisible(true);   
     }
 
-    /*@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	public void GetUserList()
     {
     	HashMap<String, String> formData = new HashMap<String, String>();
@@ -120,7 +118,6 @@ public class Client {
 			e.printStackTrace();
 		}
     }
-    */
     
     public void CreateUserList(JFrame frame)
     {
@@ -253,7 +250,7 @@ public class Client {
         	frame.add(dates[i]);
         }
         
-        /*// Previous Button
+        // Previous Button
         JButton previousButton=new JButton("▲");  
         previousButton.setBounds(1090,60,50,50);  
         previousButton.addActionListener(new ActionListener(){  
@@ -276,10 +273,9 @@ public class Client {
     	}
         });
         frame.add(nextButton);
-        */
     }
     
-    /*public void PrintUsersList(int lineCount)
+    public void PrintUsersList(int lineCount)
     {
     	GetUserList();
     	for (int i = 0; i < 5; i++)
@@ -313,7 +309,6 @@ public class Client {
     		catch (Exception e) {break;}
     	}
     }
-    */
     public void AddUserScreen(JFrame parentFrame)
     {
     	JFrame frame=new JFrame("Add User");  
@@ -509,7 +504,7 @@ public class Client {
         
     }
     
-    /* public void SearchUserScreen(JFrame parentFrame)
+    public void SearchUserScreen(JFrame parentFrame)
     {
     	JFrame frame=new JFrame("Search User");
     	frame.setDefaultCloseOperation(0);
@@ -600,7 +595,7 @@ public class Client {
         frame.setVisible(true);  
         
     }
-    */
+    
     
     public void DeleteUserScreen(JFrame parentFrame)
     {	
@@ -665,6 +660,8 @@ public class Client {
         dataOut =  new ObjectOutputStream(socket.getOutputStream());
         
         serverUsersIn = new ObjectInputStream(socket.getInputStream());
+        PrintUsersList(0);
+        
     }
 
 

@@ -350,6 +350,7 @@ public class dbActions {
 
 	public static String[] dbSearchUser(String userCode)
 	{
+		String[] userData = new String[9];
 		ResultSet result;
 		int id;
 		try {
@@ -372,10 +373,7 @@ public class dbActions {
 			  
 			  result = stmt.executeQuery(sql);
 			  System.out.println("Fetched!");
-			  
-				
-				String[] userData = new String[9];
-				
+
 				userData[0] = (result.getString("id").toString());
 				userData[1] = (result.getString("hebrewName").toString());
 				userData[2] = (result.getString("englishName").toString());
@@ -386,7 +384,7 @@ public class dbActions {
 				userData[7] = (result.getString("activeCode").toString());
 				userData[8] = (result.getString("modificationDate").toString());
 			
-				return userData;
+				
 
 		   }catch(SQLException se){
 		      se.printStackTrace();
@@ -410,7 +408,8 @@ public class dbActions {
 		      }
 		         catch(SQLException se){
 		         se.printStackTrace();
-		         }	  
+		         }
+		      return userData;
 		   }
 	}
 }

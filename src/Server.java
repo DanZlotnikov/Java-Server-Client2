@@ -46,10 +46,8 @@ public class Server {
             	PrintWriter dataOut = new PrintWriter(socket.getOutputStream());
             	ObjectOutputStream userListOut = new ObjectOutputStream(socket.getOutputStream());
             	
-            	/*ArrayList<String[]> usersArr = new ArrayList(); 
-            	usersArr = dbActions.dbSelect();
-            	userListOut.writeObject(usersArr);
-            	*/
+            	ArrayList<String[]> usersArr = new ArrayList(); 
+            	
                 // Get objects from client
                 while (true) {
                     HashMap<String, String> formData = new HashMap<String, String>();
@@ -74,7 +72,6 @@ public class Server {
                     	dataOut.println(response);
                     	dataOut.flush();
                     }
-                    /*
                     if (formData.get("dbAction").equals("get"))
                     {
                     	usersArr = dbActions.dbSelect();
@@ -86,10 +83,7 @@ public class Server {
                     	String[] user = new String[9];
                     	user = dbActions.dbSearchUser(formData.get("userCode").toString());
                     	userListOut.writeObject(user);
-                    	userListOut.flush();
-                    	userListOut.reset();
                     }
-                    */
                 }
             } catch (IOException e) {
                 log("Error handling client# " + clientNumber + ": " + e);
