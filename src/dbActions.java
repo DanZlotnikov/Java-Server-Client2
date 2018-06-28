@@ -45,7 +45,8 @@ public class dbActions {
 		catch(Exception e) {stNumber = 0;}
 		
 		String phone = data.get("phone");
-		int activeCode = Integer.parseInt(data.get("activeCode"));
+		String activeCode = data.get("activeCode");
+		int code;
 		
 		if (hebrewName == "")
 			hebrewName = "-";
@@ -72,16 +73,21 @@ public class dbActions {
 	    Connection conn = null;
 		Statement stmt = null;
 		   try{
-		      //STEP 3: Open a connection
+		      // Open a connection
 		      System.out.println("Connecting to a selected database...");
 		      conn = getConnection();
 		      
-		      //STEP 4: Execute a query
 		      System.out.println("Inserting records into the table...");
 		      stmt = conn.createStatement();
 		      
+		      // Find active code as integer
+		      String findCode = "select * from active_codes where description = '" + activeCode + "'";
+		      ResultSet result = stmt.executeQuery(findCode);
+		      result.next();
+		      code = Integer.parseInt(result.getString("activeCode").toString());
+		      
 		      String sql = "insert into customers(hebrewName, englishName, city, street, stNumber, phone, activeCode, modificationDate)\r\n" + 
-		      		String.format("values ('%1$s', '%2$s', '%3$s', '%4$s', %5$d, '%6$s', %7$d, '%8$s');", hebrewName, englishName, city, street, stNumber, phone, activeCode, modificationDate);
+		      		String.format("values ('%1$s', '%2$s', '%3$s', '%4$s', %5$d, '%6$s', %7$d, '%8$s');", hebrewName, englishName, city, street, stNumber, phone, code, modificationDate);
 		      stmt.executeUpdate(sql);
 
 		      success = "User Added successfully!";
@@ -146,11 +152,10 @@ public class dbActions {
 		Statement stmt = null;
 		
 		   try{
-		      //STEP 3: Open a connection
+		      // Open a connection
 		      System.out.println("Connecting to a selected database...");
 		      conn = getConnection();
 		      
-		      //STEP 4: Execute a query
 		      System.out.println("Updating records...");
 		      stmt = conn.createStatement();
 		      
@@ -243,11 +248,10 @@ public class dbActions {
 		Statement stmt = null;
 		   try{
 
-		      //STEP 3: Open a connection
+		      // Open a connection
 		      System.out.println("Connecting to a selected database...");
 		      conn = getConnection();
 		      
-		      //STEP 4: Execute a query
 		      System.out.println("Updating records...");
 		      stmt = conn.createStatement();
 		      String sql = "delete from customers where id = "  + id;
@@ -291,11 +295,10 @@ public class dbActions {
 		Statement stmt = null;
 		   try{
 
-			  //STEP 3: Open a connection
+			  // Open a connection
 			  System.out.println("Connecting to a selected database...");
 			  conn = getConnection();
-			  
-			  //STEP 4: Execute a query
+
 			  System.out.println("Fetching records...");
 			  stmt = conn.createStatement();
 			  String sql = "select * from customers";
@@ -348,6 +351,7 @@ public class dbActions {
 		   }
 	}
 
+	@SuppressWarnings("finally")
 	public static String[] dbSearchUser(String userCode)
 	{
 		String[] userData = new String[9];
@@ -361,11 +365,10 @@ public class dbActions {
 		Connection conn = null;
 		Statement stmt = null;
 		try{
-			  //STEP 3: Open a connection
+			  //Open a connection
 			  System.out.println("Connecting to a selected database...");
 			  conn = getConnection();
-			  
-			  //STEP 4: Execute a query
+
 			  System.out.println("Fetching records...");
 			  stmt = conn.createStatement();
 			  String sql = "select * from customers where id = " + userCode;

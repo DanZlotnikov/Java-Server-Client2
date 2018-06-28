@@ -368,7 +368,7 @@ public class Client {
                 formData.put("street", street.getText());
                 formData.put("stNumber", number.getText());
                 formData.put("phone", phone.getText());
-                formData.put("activeCode", "1");
+                formData.put("activeCode", activeCodes.getSelectedItem().toString());
                 formData.put("dbAction", "add");
                 
                 try {
@@ -554,6 +554,12 @@ public class Client {
         phone.setEditable(false);
         phone.setBounds(150,200, 150,20);
         
+        final JLabel codeLabel = new JLabel("Active Code: ");
+        codeLabel.setBounds(10,230, 150,20);
+        final JTextField code=new JTextField();  
+        code.setEditable(false);
+        code.setBounds(150,230, 150,20);
+        
         
         JButton addUserButton=new JButton("Search User");  
         addUserButton.setBounds(10,280,150,30);  
@@ -576,6 +582,7 @@ public class Client {
 					street.setText(response[4]);
 					number.setText(response[5]);
 					phone.setText(response[6]);
+					code.setText(response[7]);
 					
 				} catch (IOException | ClassNotFoundException e1) {
 					e1.printStackTrace();
@@ -592,8 +599,8 @@ public class Client {
            	}  
         }); 
         
-        frame.add(cancelButton);frame.add(addUserButton);frame.add(usernameHebrew);frame.add(usernameEnglish);frame.add(city);frame.add(street);frame.add(number);frame.add(phone);frame.add(userCode);
-        frame.add(usernameHebrewLabel);frame.add(usernameEnglishLabel);frame.add(cityLabel);frame.add(streetLabel);frame.add(numberLabel);frame.add(phoneLabel);frame.add(userCodeLabel);    
+        frame.add(cancelButton);frame.add(addUserButton);frame.add(usernameHebrew);frame.add(usernameEnglish);frame.add(city);frame.add(street);frame.add(number);frame.add(phone);frame.add(userCode);frame.add(code);
+        frame.add(usernameHebrewLabel);frame.add(usernameEnglishLabel);frame.add(cityLabel);frame.add(streetLabel);frame.add(numberLabel);frame.add(phoneLabel);frame.add(userCodeLabel);frame.add(codeLabel); 
         frame.setSize(350,380);  
         frame.setLayout(null); 
         frame.setLocationRelativeTo(null);

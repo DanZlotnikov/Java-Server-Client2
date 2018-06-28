@@ -21,18 +21,18 @@ public class Server {
         ServerSocket listener = new ServerSocket(5050);
         try {
             while (true) {
-                new Capitalizer(listener.accept(), clientNumber++).start();
+                new Operational(listener.accept(), clientNumber++).start();
             }
         } finally {
             listener.close();
         }
     }
 
-    private static class Capitalizer extends Thread {
+    private static class Operational extends Thread {
         private Socket socket;
         private int clientNumber;
 
-        public Capitalizer(Socket socket, int clientNumber) {
+        public Operational(Socket socket, int clientNumber) {
             this.socket = socket;
             this.clientNumber = clientNumber;
             log("New connection with client# " + clientNumber + " at " + socket);
