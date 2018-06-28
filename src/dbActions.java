@@ -356,12 +356,11 @@ public class dbActions {
 		try {
 			id = Integer.parseInt(userCode);
 		}
-		catch (Exception e){}
+		catch (Exception e){ return userData; }
 		
 		Connection conn = null;
 		Statement stmt = null;
 		try{
-
 			  //STEP 3: Open a connection
 			  System.out.println("Connecting to a selected database...");
 			  conn = getConnection();
@@ -373,7 +372,10 @@ public class dbActions {
 			  
 			  result = stmt.executeQuery(sql);
 			  System.out.println("Fetched!");
-
+			  if (result.next())
+			  {
+				if (result.getString("id") != null)
+				{
 				userData[0] = (result.getString("id").toString());
 				userData[1] = (result.getString("hebrewName").toString());
 				userData[2] = (result.getString("englishName").toString());
@@ -383,8 +385,8 @@ public class dbActions {
 				userData[6] = (result.getString("phone").toString());
 				userData[7] = (result.getString("activeCode").toString());
 				userData[8] = (result.getString("modificationDate").toString());
-			
-				
+				}
+			  }
 
 		   }catch(SQLException se){
 		      se.printStackTrace();
@@ -392,7 +394,8 @@ public class dbActions {
 		   }catch(Exception e){
 		      e.printStackTrace();
 			   return null;
-		   }finally{
+		   }
+			finally{
 		      try{
 		         if(stmt!=null)
 		         {

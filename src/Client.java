@@ -95,7 +95,7 @@ public class Client {
         frame.add(updateUserButton);
         frame.add(getUsersButton);
         frame.add(deleteUserButton);
-        //frame.add(searchUserButton);
+        frame.add(searchUserButton);
         frame.setSize(1200,350);  
         frame.setLayout(null); 
         frame.setLocationRelativeTo(null);
@@ -309,6 +309,7 @@ public class Client {
     		catch (Exception e) {break;}
     	}
     }
+    
     public void AddUserScreen(JFrame parentFrame)
     {
     	JFrame frame=new JFrame("Add User");  
@@ -520,31 +521,37 @@ public class Client {
     	final JLabel usernameHebrewLabel = new JLabel("Username (Hebrew): ");
     	usernameHebrewLabel.setBounds(10,50, 150,20);
         final JTextField usernameHebrew=new JTextField();  
+        usernameHebrew.setEditable(false);
         usernameHebrew.setBounds(150, 50, 150,20);  
         
         final JLabel usernameEnglishLabel = new JLabel("Username (English): ");
         usernameEnglishLabel.setBounds(10,80, 150,20);
         final JTextField usernameEnglish=new JTextField();  
+        usernameEnglish.setEditable(false);
         usernameEnglish.setBounds(150, 80, 150,20);
         
         final JLabel cityLabel = new JLabel("City: ");
         cityLabel.setBounds(10,110, 150,20);
         final JTextField city=new JTextField();  
+        city.setEditable(false);
         city.setBounds(150,110, 150,20);
         
         final JLabel streetLabel = new JLabel("Street: ");
         streetLabel.setBounds(10,140, 150,20);
-        final JTextField street=new JTextField();  
+        final JTextField street=new JTextField();
+        street.setEditable(false);
         street.setBounds(150,140, 150,20);
         
         final JLabel numberLabel = new JLabel("House no.: ");
         numberLabel.setBounds(10,170, 150,20);
         final JTextField number=new JTextField();  
+        number.setEditable(false);
         number.setBounds(150,170, 150,20);
         
         final JLabel phoneLabel = new JLabel("Phone: ");
         phoneLabel.setBounds(10,200, 150,20);
         final JTextField phone=new JTextField();  
+        phone.setEditable(false);
         phone.setBounds(150,200, 150,20);
         
         
@@ -557,6 +564,7 @@ public class Client {
         		formData.put("dbAction", "search");
                 
                 try {
+
 					dataOut.writeObject(formData);
 					dataOut.flush();
 					response = (String[])serverUsersIn.readObject();
@@ -572,9 +580,6 @@ public class Client {
 				} catch (IOException | ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
-
-                parentFrame.setEnabled(true); 
-                frame.dispose();  
            	}  
         }); 
         
@@ -595,7 +600,6 @@ public class Client {
         frame.setVisible(true);  
         
     }
-    
     
     public void DeleteUserScreen(JFrame parentFrame)
     {	

@@ -81,7 +81,7 @@ public class Server {
                     if (formData.get("dbAction").equals("search"))
                     {
                     	String[] user = new String[9];
-                    	user = dbActions.dbSearchUser(formData.get("userCode").toString());
+                    	user = dbActions.dbSearchUser(formData.get("userCode"));
                     	userListOut.writeObject(user);
                     }
                 }
