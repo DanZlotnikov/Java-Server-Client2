@@ -1,3 +1,5 @@
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,12 +36,13 @@ public class Client {
 
 
     public Client() { 	
-    	final JFrame frame=new JFrame("Mr. Java"); 
+    	JFrame.setDefaultLookAndFeelDecorated(true);
     	
+    	final JFrame frame=new JFrame("Mr. Java"); 
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	frame.setExtendedState(frame.getExtendedState() | JFrame.NORMAL);
     	
-    	
+    	JOptionPane.showMessageDialog(frame, "Welcome");
         CreateUserList(frame);
         
     	// Add User Button
@@ -98,7 +101,23 @@ public class Client {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);   
     }
-
+    
+    public void removeMinMaxClose(Component comp)
+    {
+      if(comp instanceof AbstractButton)
+      {
+        comp.getParent().remove(comp);
+      }
+      if (comp instanceof Container)
+      {
+        Component[] comps = ((Container)comp).getComponents();
+        for(int x = 0, y = comps.length; x < y; x++)
+        {
+          removeMinMaxClose(comps[x]);
+        }
+      }
+    }
+    
     @SuppressWarnings("unchecked")
 	public void GetUserList()
     {
@@ -311,6 +330,7 @@ public class Client {
     {
     	JFrame frame=new JFrame("Add User");  
     	frame.setDefaultCloseOperation(0);
+    	removeMinMaxClose(frame);
     	
     	parentFrame.setEnabled(false);
         HashMap<String, String> formData = new HashMap<String, String>();
@@ -408,6 +428,7 @@ public class Client {
     {
     	JFrame frame=new JFrame("Update User");
     	frame.setDefaultCloseOperation(0);
+    	removeMinMaxClose(frame);
     	
     	parentFrame.setEnabled(false);
         HashMap<String, String> formData = new HashMap<String, String>();
@@ -507,6 +528,7 @@ public class Client {
     {
     	JFrame frame=new JFrame("Search User");
     	frame.setDefaultCloseOperation(0);
+    	removeMinMaxClose(frame);
     	
     	parentFrame.setEnabled(false);
         HashMap<String, String> formData = new HashMap<String, String>();
@@ -610,6 +632,7 @@ public class Client {
     {	
     	JFrame frame=new JFrame("Delete User");  
     	frame.setDefaultCloseOperation(0);
+    	removeMinMaxClose(frame);
     	
     	parentFrame.setEnabled(false); 
     	HashMap<String, String> formData = new HashMap<String, String>();
