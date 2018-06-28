@@ -88,9 +88,6 @@ public class Client {
     		lineCount = 0;
             }  
         });  
-        
-        
-        
         frame.add(addUserButton);
         frame.add(updateUserButton);
         frame.add(getUsersButton);
@@ -384,6 +381,7 @@ public class Client {
                 frame.dispose();
                 
                 JOptionPane.showMessageDialog(parentFrame, response);
+                PrintUsersList(lineCount);
                 
            	}  
         }); 
@@ -468,7 +466,7 @@ public class Client {
                 formData.put("street", street.getText());
                 formData.put("stNumber", number.getText());
                 formData.put("phone", phone.getText());
-                formData.put("activeCode", "1");
+                formData.put("activeCode", activeCodes.getSelectedItem().toString());
                 formData.put("dbAction", "update");
                 
                 try {
@@ -483,7 +481,7 @@ public class Client {
                 parentFrame.setEnabled(true); 
                 frame.dispose();  
                 JOptionPane.showMessageDialog(parentFrame, response);
-                
+                PrintUsersList(lineCount);
            	}  
         }); 
         
@@ -641,6 +639,7 @@ public class Client {
     	parentFrame.setEnabled(true); 
         frame.dispose();
         JOptionPane.showMessageDialog(parentFrame, response);
+        PrintUsersList(lineCount);
             }  
         });  
         

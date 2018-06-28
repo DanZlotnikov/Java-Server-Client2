@@ -140,7 +140,9 @@ public class dbActions {
 		catch(Exception e) {stNumber = Integer.MIN_VALUE;}
 		
 		String phone = data.get("phone");
-		int activeCode = Integer.parseInt(data.get("activeCode"));
+		
+		String activeCode = data.get("activeCode");
+		int code;
 		
 		Date dNow = new Date();
 	      SimpleDateFormat ft = 
@@ -158,6 +160,12 @@ public class dbActions {
 		      
 		      System.out.println("Updating records...");
 		      stmt = conn.createStatement();
+		      
+		      // Find active code as integer
+		      String findCode = "select * from active_codes where description = '" + activeCode + "'";
+		      ResultSet result = stmt.executeQuery(findCode);
+		      result.next();
+		      code = Integer.parseInt(result.getString("activeCode").toString());
 		      
 		      String checkSql = "select * from customers where id = " + id;
 			   ResultSet customers = stmt.executeQuery(checkSql);
@@ -195,7 +203,7 @@ public class dbActions {
 		    	  sql += "phone = " + "'" + phone + "', ";
 		      }
 		      
-		      sql += "activeCode = " + "'" + activeCode + "', ";
+		      sql += "activeCode = " + "'" + code + "', ";
 		      
 		      sql += "modificationDate = " + "'" + modificationDate + "' ";
 		      
