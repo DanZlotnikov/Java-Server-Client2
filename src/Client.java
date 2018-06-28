@@ -47,7 +47,7 @@ public class Client {
         
     	// Add User Button
         JButton addUserButton=new JButton("Add User");  
-        addUserButton.setBounds(400,250,120,30);  
+        addUserButton.setBounds(10,220,120,30);  
         addUserButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
                 AddUserScreen(frame);
@@ -56,44 +56,54 @@ public class Client {
         
         // Update User Button
         JButton updateUserButton=new JButton("Update User");  
-        updateUserButton.setBounds(530,250,120,30);  
+        updateUserButton.setBounds(140,260,120,30);  
         updateUserButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
     	 		UpdateUserScreen(frame);
             }  
         });  
+ 
+        // Search User Button
+        JButton searchUserButton=new JButton("Search User");  
+        searchUserButton.setBounds(140,220,120,30);  
+        searchUserButton.addActionListener(new ActionListener(){  
+    public void actionPerformed(ActionEvent e){  
+    			SearchUserScreen(frame); 
+            }  
+        });  
         
         // Delete User Button
         JButton deleteUserButton=new JButton("Delete User");  
-        deleteUserButton.setBounds(660,250,120,30);  
+        deleteUserButton.setBounds(10,260,120,30);  
         deleteUserButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
     			DeleteUserScreen(frame); 
             }  
         });  
         
-      
-        // Search User Button
-        JButton searchUserButton=new JButton("Search User");  
-        searchUserButton.setBounds(660,210,120,30);  
-        searchUserButton.addActionListener(new ActionListener(){  
-    public void actionPerformed(ActionEvent e){  
-    			SearchUserScreen(frame); 
-            }  
-        });  
-
-        // Get Users Button
-        JButton getUsersButton=new JButton("Jump to Top");  
-        getUsersButton.setBounds(400,210,120,30);  
-        getUsersButton.addActionListener(new ActionListener(){  
+        // Jump to Top Button
+        JButton jumpTopButton=new JButton("Top");  
+        jumpTopButton.setBounds(1080,20,100,30);  
+        jumpTopButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
     		PrintUsersList(0);
     		lineCount = 0;
             }  
         });  
+        
+        // Jump to Bottom Button
+        JButton jumpBottomButton=new JButton("Bottom");  
+        jumpBottomButton.setBounds(1080,180,100,30);  
+        jumpBottomButton.addActionListener(new ActionListener(){  
+        	public void actionPerformed(ActionEvent e){  
+    		PrintUsersList(userList.size() - 5);
+    		lineCount = userList.size() - 5;
+            }  
+        }); 
         frame.add(addUserButton);
         frame.add(updateUserButton);
-        frame.add(getUsersButton);
+        frame.add(jumpTopButton);
+        frame.add(jumpBottomButton);
         frame.add(deleteUserButton);
         frame.add(searchUserButton);
         frame.setSize(1200,350);  
@@ -268,7 +278,7 @@ public class Client {
         
         // Previous Button
         JButton previousButton=new JButton("▲");  
-        previousButton.setBounds(1090,60,50,50);  
+        previousButton.setBounds(1105,60,50,50);  
         previousButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
     	if (lineCount > 4)
@@ -280,7 +290,7 @@ public class Client {
         
         // Next Button
         JButton nextButton=new JButton("▼");  
-        nextButton.setBounds(1090,120,50,50);  
+        nextButton.setBounds(1105,120,50,50);  
         nextButton.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
     	if (lineCount < userList.size() - 5) 
