@@ -83,6 +83,7 @@ public class Server {
                     	String[] user = new String[9];
                     	user = dbActions.dbSearchUser(formData.get("userCode"));
                     	userListOut.writeObject(user);
+                    	userListOut.flush();
                     }
                 }
             } catch (IOException e) {

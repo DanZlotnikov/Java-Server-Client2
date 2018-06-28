@@ -399,7 +399,7 @@ public class Client {
         
         frame.add(addUserButton);frame.add(cancelButton);frame.add(usernameHebrew);frame.add(usernameEnglish);frame.add(city);frame.add(street);frame.add(number);frame.add(phone);frame.add(activeCodes);
         frame.add(usernameHebrewLabel);frame.add(usernameEnglishLabel);frame.add(cityLabel);frame.add(streetLabel);frame.add(numberLabel);frame.add(phoneLabel);frame.add(activeCodesLabel);   
-        frame.setSize(400,400);  
+        frame.setSize(350,350);  
         frame.setLayout(null); 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);  
@@ -498,7 +498,7 @@ public class Client {
         
         frame.add(cancelButton);frame.add(addUserButton);frame.add(usernameHebrew);frame.add(usernameEnglish);frame.add(city);frame.add(street);frame.add(number);frame.add(phone);frame.add(activeCodes);frame.add(userCode);
         frame.add(usernameHebrewLabel);frame.add(usernameEnglishLabel);frame.add(cityLabel);frame.add(streetLabel);frame.add(numberLabel);frame.add(phoneLabel);frame.add(activeCodesLabel);frame.add(userCodeLabel);    
-        frame.setSize(400,400);  
+        frame.setSize(350,380);  
         frame.setLayout(null); 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);  
@@ -568,7 +568,7 @@ public class Client {
 					dataOut.writeObject(formData);
 					dataOut.flush();
 					response = (String[])serverUsersIn.readObject();
-					
+					userCode.setEditable(false);
 					userCode.setText(response[0]);
 					usernameHebrew.setText(response[1]);
 					usernameEnglish.setText(response[2]);
@@ -594,7 +594,7 @@ public class Client {
         
         frame.add(cancelButton);frame.add(addUserButton);frame.add(usernameHebrew);frame.add(usernameEnglish);frame.add(city);frame.add(street);frame.add(number);frame.add(phone);frame.add(userCode);
         frame.add(usernameHebrewLabel);frame.add(usernameEnglishLabel);frame.add(cityLabel);frame.add(streetLabel);frame.add(numberLabel);frame.add(phoneLabel);frame.add(userCodeLabel);    
-        frame.setSize(400,400);  
+        frame.setSize(350,380);  
         frame.setLayout(null); 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);  
@@ -647,7 +647,7 @@ public class Client {
         }); 
         
         frame.add(cancelButton);frame.add(b);frame.add(userCode);frame.add(userCodeLabel); 
-        frame.setSize(400, 150);  
+        frame.setSize(350, 150);  
         frame.setLayout(null); 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);  
