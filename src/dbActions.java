@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -96,15 +97,12 @@ public class dbActions {
 		         if(stmt!=null)
 		         {
 		            conn.close();
-		            success  = "User Added successfully!";
 		         }
 		         }catch(SQLException se){
-		    	  success = "User Added successfully!";
 		      }
 		      try{
 		         if(conn!=null)
 		         {
-		        	 success  = "User Added successfully!";
 		        	 conn.close();
 		         }
 		      }
@@ -199,7 +197,7 @@ public class dbActions {
 		      sql += "where id = " + id;
 		      
 		      stmt.executeUpdate(sql);
-		      success = "User Updated successfully!";
+		      success = "Action success";
 
 		   }catch(SQLException se){
 			   success  = "Action failed";
@@ -211,16 +209,14 @@ public class dbActions {
 		      try{
 		         if(stmt!=null)
 		         {
+		        	success = "Action success";
 		            conn.close();
-		            success  = "User Updated successfully!";
 		         }
 		         }catch(SQLException se){
-		    	  success = "User Updated successfully!";
 		      }
 		      try{
 		         if(conn!=null)
 		         {
-		        	 success  = "User Updated successfully!";
 		        	 conn.close();
 		         }
 		      }
@@ -257,7 +253,7 @@ public class dbActions {
 		      String sql = "delete from customers where id = "  + id;
 		      
 		      stmt.executeUpdate(sql);
-		      success = "User deleted successfully!";
+		      success = "Action success";
 
 		   }catch(SQLException se){
 			   success  = "Action failed";
@@ -270,15 +266,12 @@ public class dbActions {
 		         if(stmt!=null)
 		         {
 		            conn.close();
-		            success  = "User deleted successfully!";
 		         }
 		         }catch(SQLException se){
-		    	  success = "User deleted successfully!";
 		      }
 		      try{
 		         if(conn!=null)
 		         {
-		        	 success  = "User deleted successfully!";
 		        	 conn.close();
 		         }
 		      }
@@ -291,4 +284,133 @@ public class dbActions {
 		
 	}
 	
+	public static ArrayList<String[]> dbSelect()
+	{	
+		ResultSet result;
+		Connection conn = null;
+		Statement stmt = null;
+		   try{
+
+			  //STEP 3: Open a connection
+			  System.out.println("Connecting to a selected database...");
+			  conn = getConnection();
+			  
+			  //STEP 4: Execute a query
+			  System.out.println("Fetching records...");
+			  stmt = conn.createStatement();
+			  String sql = "select * from customers";
+			  
+			  result = stmt.executeQuery(sql);
+			  System.out.println("Fetched!");
+			  
+				ArrayList<String[]> usersList = new ArrayList<>(); 
+				
+				while (result.next())
+				{
+					String[] userData = new String[9];
+					userData[0] = (result.getString("id").toString());
+					userData[1] = (result.getString("hebrewName").toString());
+					userData[2] = (result.getString("englishName").toString());
+					userData[3] = (result.getString("city").toString());
+					userData[4] = (result.getString("street").toString());
+					userData[5] = (result.getString("stNumber").toString());
+					userData[6] = (result.getString("phone").toString());
+					userData[7] = (result.getString("activeCode").toString());
+					userData[8] = (result.getString("modificationDate").toString());
+					usersList.add(userData);
+				
+				}
+				return usersList;
+
+		   }catch(SQLException se){
+		      se.printStackTrace();
+			   return null;
+		   }catch(Exception e){
+		      e.printStackTrace();
+			   return null;
+		   }finally{
+		      try{
+		         if(stmt!=null)
+		         {
+		            conn.close();
+		         }
+		         }catch(SQLException se){
+		      }
+		      try{
+		         if(conn!=null)
+		         {
+		        	 conn.close();
+		         }
+		      }
+		         catch(SQLException se){
+		         se.printStackTrace();
+		         }	  
+		   }
+	}
+
+	public static String[] dbSearchUser(String userCode)
+	{
+		ResultSet result;
+		int id;
+		try {
+			id = Integer.parseInt(userCode);
+		}
+		catch (Exception e){}
+		
+		Connection conn = null;
+		Statement stmt = null;
+		try{
+
+			  //STEP 3: Open a connection
+			  System.out.println("Connecting to a selected database...");
+			  conn = getConnection();
+			  
+			  //STEP 4: Execute a query
+			  System.out.println("Fetching records...");
+			  stmt = conn.createStatement();
+			  String sql = "select * from customers where id = " + userCode;
+			  
+			  result = stmt.executeQuery(sql);
+			  System.out.println("Fetched!");
+			  
+				
+				String[] userData = new String[9];
+				
+				userData[0] = (result.getString("id").toString());
+				userData[1] = (result.getString("hebrewName").toString());
+				userData[2] = (result.getString("englishName").toString());
+				userData[3] = (result.getString("city").toString());
+				userData[4] = (result.getString("street").toString());
+				userData[5] = (result.getString("stNumber").toString());
+				userData[6] = (result.getString("phone").toString());
+				userData[7] = (result.getString("activeCode").toString());
+				userData[8] = (result.getString("modificationDate").toString());
+			
+				return userData;
+
+		   }catch(SQLException se){
+		      se.printStackTrace();
+			   return null;
+		   }catch(Exception e){
+		      e.printStackTrace();
+			   return null;
+		   }finally{
+		      try{
+		         if(stmt!=null)
+		         {
+		            conn.close();
+		         }
+		         }catch(SQLException se){
+		      }
+		      try{
+		         if(conn!=null)
+		         {
+		        	 conn.close();
+		         }
+		      }
+		         catch(SQLException se){
+		         se.printStackTrace();
+		         }	  
+		   }
+	}
 }
